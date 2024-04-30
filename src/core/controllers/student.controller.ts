@@ -19,14 +19,9 @@ export class StudentController {
     return this.studentService.create(createStudentDto);
   }
 
-  @Get()
-  findAll() {
-    return this.studentService.findAll();
-  }
-
-  @Get(':personId')
-  findOne(@Param('personId') personId: string) {
-    return this.studentService.findOne(personId);
+  @Get(':email')
+  findOne(@Param('email') email: string) {
+    return this.studentService.findOne(email);
   }
 
   @Put(':personId')

@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import 'dotenv/config';
 import { dynamoDBClient } from '../../aws-config/dynamoDBClient';
 import { CreateStudentDto, UpdateStudentDto } from 'src/core';
@@ -7,6 +11,8 @@ const { TABLE_NAME } = process.env;
 
 @Injectable()
 export class StudentService {
+  private studentPrefix = 'STUDENT#';
+
   async create(createStudentDto: CreateStudentDto) {
     const pk = createStudentDto.email;
     const sk = createStudentDto.email;
@@ -14,8 +20,8 @@ export class StudentService {
       .put({
         TableName: TABLE_NAME,
         Item: {
-          PK: `STUDENT#${pk}`,
-          SK: `STUDENT#${sk}`,
+          PK: this.studentPrefix.concat(pk),
+          SK: this.studentPrefix.concat(sk),
           name: createStudentDto.name,
           email: createStudentDto.email,
         },
@@ -23,25 +29,30 @@ export class StudentService {
       .promise();
   }
 
-  async findAll() {
-    const results = await dynamoDBClient()
-      .scan({
-        TableName: TABLE_NAME,
-      })
-      .promise();
+  async findOne(email: string) {
+    let student: object;
 
-    return results.Items;
-  }
+    try {
+      const result = await dynamoDBClient()
+        .get({
+          TableName: TABLE_NAME,
+          Key: {
+            PK: this.studentPrefix.concat(email),
+            SK: this.studentPrefix.concat(email),
+          },
+        })
+        .promise();
 
-  async findOne(personId: string) {
-    const result = await dynamoDBClient()
-      .get({
-        TableName: TABLE_NAME,
-        Key: { personId },
-      })
-      .promise();
+      student = result.Item;
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
 
-    return result.Item;
+    if (!student) {
+      throw new NotFoundException(`Student with email ${email} not found`);
+    }
+
+    return student;
   }
 
   async update(personId: string, updateStudentDto: UpdateStudentDto) {
