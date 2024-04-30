@@ -8,12 +8,12 @@ const { TABLE_NAME } = process.env;
 
 @Injectable()
 export class PersonService {
-  async create(createPersonDto: CreatePersonDto) {
+  async create(createPersonDto: CreatePersonDto, personType) {
     return await dynamoDBClient()
       .put({
         TableName: TABLE_NAME,
         Item: {
-          personId: `TEACHER#${createPersonDto.email}`,
+          personId: `${personType}#${createPersonDto.email}`,
           name: createPersonDto.name,
           email: createPersonDto.email,
         },

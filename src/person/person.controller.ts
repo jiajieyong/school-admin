@@ -11,13 +11,18 @@ import { PersonService } from './person.service';
 import { CreatePersonDto } from './dto/create-person.dto';
 import { UpdatePersonDto } from './dto/update-person.dto';
 
-@Controller('person')
+@Controller('api')
 export class PersonController {
   constructor(private readonly personService: PersonService) {}
 
-  @Post()
+  @Post('/teachers')
   create(@Body() createPersonDto: CreatePersonDto) {
-    return this.personService.create(createPersonDto);
+    return this.personService.create(createPersonDto, 'TEACHER');
+  }
+
+  @Post('/students')
+  addStudent(@Body() createPersonDto: CreatePersonDto) {
+    return this.personService.create(createPersonDto, 'STUDENT');
   }
 
   @Get()
