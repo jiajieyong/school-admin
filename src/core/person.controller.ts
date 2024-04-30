@@ -15,11 +15,6 @@ import { CreateStudentDto } from './dto/student.dto';
 export class PersonController {
   constructor(private readonly personService: PersonService) {}
 
-  @Post('/teachers')
-  create(@Body() createPersonDto: CreateTeacherDto) {
-    return this.personService.create(createPersonDto);
-  }
-
   @Post('/students')
   addStudent(@Body() createPersonDto: CreateStudentDto) {
     return this.personService.create(createPersonDto);
@@ -38,9 +33,9 @@ export class PersonController {
   @Put(':personId')
   update(
     @Param('personId') personId: string,
-    @Body() updatePersonDto: CreateTeacherDto,
+    @Body() updateTeacherDto: CreateTeacherDto,
   ) {
-    return this.personService.update(personId, updatePersonDto);
+    return this.personService.update(personId, updateTeacherDto);
   }
 
   @Delete(':personId')
