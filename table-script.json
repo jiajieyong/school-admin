@@ -1,0 +1,19 @@
+{
+    "TableName": "person",
+    "KeySchema": [
+    {
+        "AttributeName": "personId",
+        "KeyType": "HASH"
+    }
+    ],
+    "AttributeDefinitions": [
+    {
+        "AttributeName": "personId",
+        "AttributeType": "S"
+    }
+    ],
+    "ProvisionedThroughput": {
+        "ReadCapacityUnits": 5,
+        "WriteCapacityUnits": 5
+    }
+}
