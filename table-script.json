@@ -1,19 +1,15 @@
 {
-    "TableName": "person",
-    "KeySchema": [
-    {
-        "AttributeName": "personId",
-        "KeyType": "HASH"
-    }
-    ],
+    "TableName": "data",
     "AttributeDefinitions": [
-    {
-        "AttributeName": "personId",
-        "AttributeType": "S"
-    }
+        { "AttributeName": "PK", "AttributeType": "S" },
+        { "AttributeName": "SK", "AttributeType": "S" }
+    ],
+    "KeySchema": [
+        { "AttributeName": "PK", "KeyType": "HASH" },
+        { "AttributeName": "SK", "KeyType": "RANGE" }
     ],
     "ProvisionedThroughput": {
-        "ReadCapacityUnits": 5,
-        "WriteCapacityUnits": 5
+        "ReadCapacityUnits": 10,
+        "WriteCapacityUnits": 10
     }
 }
