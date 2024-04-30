@@ -1,29 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import 'dotenv/config';
-import { dynamoDBClient } from '../aws-config/dynamoDBClient';
-import { CreateTeacherDto, UpdateTeacherDto } from './dto/teacher.dto';
+import { dynamoDBClient } from '../../aws-config/dynamoDBClient';
+import { CreateStudentDto, UpdateStudentDto } from 'src/core';
 
 const { TABLE_NAME } = process.env;
 
-export type Key = 'PK' | 'SK';
-export type ItemKey = {
-  [key in Key]: string;
-};
-export type PrimaryKey = string | { pk: string; sk: string };
-
 @Injectable()
-export class PersonService {
-  async create(createPersonDto: CreateTeacherDto) {
-    const pk = createPersonDto.email;
-    const sk = createPersonDto.email;
+export class StudentService {
+  async create(createStudentDto: CreateStudentDto) {
+    const pk = createStudentDto.email;
+    const sk = createStudentDto.email;
     return await dynamoDBClient()
       .put({
         TableName: TABLE_NAME,
         Item: {
-          PK: `TEACHER#${pk}`,
-          SK: `TEACHER#${sk}`,
-          name: createPersonDto.name,
-          email: createPersonDto.email,
+          PK: `STUDENT#${pk}`,
+          SK: `STUDENT#${sk}`,
+          name: createStudentDto.name,
+          email: createStudentDto.email,
         },
       })
       .promise();
@@ -50,7 +44,7 @@ export class PersonService {
     return result.Item;
   }
 
-  async update(personId: string, updatePersonDto: UpdateTeacherDto) {
+  async update(personId: string, updateStudentDto: UpdateStudentDto) {
     const updated = await dynamoDBClient()
       .update({
         TableName: TABLE_NAME,
@@ -60,8 +54,8 @@ export class PersonService {
           '#name': 'name',
         },
         ExpressionAttributeValues: {
-          ':name': updatePersonDto.name,
-          ':email': updatePersonDto.email,
+          ':name': updateStudentDto.name,
+          ':email': updateStudentDto.email,
         },
         ReturnValues: 'ALL_NEW',
       })
