@@ -18,6 +18,11 @@ export class TeacherController {
     return this.teacherService.create(createTeacherDto);
   }
 
+  @Get()
+  findAll() {
+    return this.teacherService.findAll();
+  }
+
   @Get(':email')
   findOne(@Param('email') email: string) {
     return this.teacherService.findOne(email);

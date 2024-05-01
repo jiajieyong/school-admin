@@ -29,6 +29,16 @@ export class TeacherService {
       .promise();
   }
 
+  async findAll() {
+    const results = await dynamoDBClient()
+      .scan({
+        TableName: TABLE_NAME,
+      })
+      .promise();
+
+    return results.Items;
+  }
+
   async findOne(email: string) {
     let teacher: object;
 
