@@ -29,33 +29,6 @@ export class TeacherService {
       .promise();
   }
 
-  async findAll() {
-    let teachers = [];
-    try {
-      const results = await dynamoDBClient()
-        .query({
-          TableName: TABLE_NAME,
-          KeyConditionExpression: '#PK=:PK AND begins_with(#SK, :SK)',
-          ExpressionAttributeNames: {
-            '#PK': 'PK',
-            '#SK': 'SK',
-          },
-          ExpressionAttributeValues: {
-            ':PK': this.teacherPrefix,
-            ':SK': this.teacherPrefix,
-          },
-          ScanIndexForward: false,
-          Limit: 100,
-        })
-        .promise();
-      teachers = results.Items;
-    } catch (error) {
-      throw new InternalServerErrorException(error);
-    }
-
-    return teachers;
-  }
-
   async findOne(email: string) {
     let teacher: object;
 

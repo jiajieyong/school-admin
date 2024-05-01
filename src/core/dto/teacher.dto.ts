@@ -1,4 +1,4 @@
-import { IsString } from 'class-validator';
+import { IsString, IsArray } from 'class-validator';
 
 export class CreateTeacherDto {
   @IsString()
@@ -16,10 +16,10 @@ export class UpdateTeacherDto {
   email: string;
 }
 
-export class AssignStudentToTeacherDto {
+export class RegisterStudentToTeacherDto {
   @IsString()
-  name: string;
+  teacher: string;
 
-  @IsString()
-  email: string;
+  @IsArray()
+  students: string[];
 }
