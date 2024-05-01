@@ -81,9 +81,9 @@ class RegisterStudentToTeacherHandler
   }
 }
 
-Module({
+@Module({
   imports: [CqrsModule],
   controllers: [RegisterStudentToTeacherController],
   providers: [RegisterStudentToTeacherHandler],
-});
+})
 export class RegisterStudentToTeacherModule {}

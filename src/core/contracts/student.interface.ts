@@ -3,7 +3,7 @@ import { Student } from '../entities';
 
 export abstract class IStudentsResource {
   abstract addStudent(
-    createTeacherDto: CreateStudentDto,
+    createStudentDto: CreateStudentDto,
   ): Promise<string | undefined>;
   abstract one(studentEmail: string): Promise<Student | undefined>;
 }

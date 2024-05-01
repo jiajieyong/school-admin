@@ -22,7 +22,7 @@ class DeleteTeacherCommand {
 class DeleteTeacherController {
   constructor(private readonly commandBus: CommandBus) {}
   @Delete('teachers/:id')
-  deletePatient(@Param('id') teacherEmail: string) {
+  deleteTeacher(@Param('id') teacherEmail: string) {
     return this.commandBus.execute(new DeleteTeacherCommand(teacherEmail));
   }
 }
@@ -43,6 +43,6 @@ class DeleteTeacherHandler implements ICommandHandler<DeleteTeacherCommand> {
 @Module({
   imports: [CqrsModule],
   controllers: [DeleteTeacherController],
-  // providers: [DeleteTeacherHandler],
+  providers: [DeleteTeacherHandler],
 })
 export class DeleteTeacherModule {}

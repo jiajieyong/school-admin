@@ -37,7 +37,7 @@ export class TeacherStudentsResource
 }
 
 function generateDecorator(teacher: Teacher) {
-  return function decorateDoctorPatient(
+  return function decorateTeacherToStudent(
     addStudentDto: AssignToTeacherDto & ItemKey,
   ) {
     return {
