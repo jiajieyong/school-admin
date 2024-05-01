@@ -15,3 +15,11 @@ export class UpdateStudentDto {
   @IsString()
   email: string;
 }
+
+export class AssignToTeacherDto {
+  @IsString()
+  name: string;
+
+  @IsString()
+  email: string;
+}

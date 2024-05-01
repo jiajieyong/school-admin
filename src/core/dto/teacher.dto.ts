@@ -16,7 +16,7 @@ export class UpdateTeacherDto {
   email: string;
 }
 
-export class RegisterStudentToTeacherDto {
+export class RegisterStudentsToTeacherDto {
   @IsString()
   teacher: string;
 
