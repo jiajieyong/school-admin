@@ -23,3 +23,14 @@ export class AssignToTeacherDto {
   @IsString()
   email: string;
 }
+
+export class DeleteFromTeacherDto {
+  @IsString()
+  teacher: string;
+
+  @IsString()
+  student: string;
+
+  @IsString()
+  reason: string;
+}

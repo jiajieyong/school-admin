@@ -34,6 +34,13 @@ export class TeacherStudentsResource
       decorator,
     });
   }
+
+  removeStudentFromTeacher(
+    teacherEmail: string,
+    studentEmail: string,
+  ): Promise<string | undefined> {
+    return this.remove(teacherEmail, studentEmail);
+  }
 }
 
 function generateDecorator(teacher: Teacher) {

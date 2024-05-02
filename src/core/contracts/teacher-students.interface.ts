@@ -11,4 +11,8 @@ export abstract class ITeacherStudentsResource {
     teacher: Teacher,
     addStudentDto: AssignToTeacherDto,
   ): Promise<string | undefined>;
+  abstract removeStudentFromTeacher(
+    teacherEmail: string,
+    studentEmail: string,
+  ): Promise<string | undefined>;
 }

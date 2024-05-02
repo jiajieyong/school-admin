@@ -77,7 +77,6 @@ class RegisterStudentToTeacherHandler
 
       this.teacherStudents.addStudent(teacher, student);
     }
-    return '';
   }
 }
 
