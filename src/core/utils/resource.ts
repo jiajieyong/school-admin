@@ -36,7 +36,7 @@ interface CreateResource<T> {
   skPrefix?: string;
 }
 
-function projectionGenerator<T>(template: { new (): T }): {
+export function projectionGenerator<T>(template: { new (): T }): {
   projectionExpression: string;
   projectionNames: Record<string, string>;
 } {
