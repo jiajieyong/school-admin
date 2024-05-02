@@ -13,9 +13,7 @@ import {
 } from '@nestjs/cqrs';
 import { QueryCommand } from '@aws-sdk/lib-dynamodb';
 import { client } from 'src/aws-config/dynamoDBClient';
-import { projectionGenerator } from '../utils/resource';
-import { TEACHER_ID_PREFIX, STUDENT_ID_PREFIX } from '../utils/constants';
-import { TeacherStudent } from 'src/core';
+import { TEACHER_ID_PREFIX } from '../utils/constants';
 
 const { TABLE_NAME } = process.env;
 
@@ -39,30 +37,27 @@ class ListStudentsForTeachersHandler
 {
   async listStudentsForTeachers(
     teacherEmail: string,
-  ): Promise<TeacherStudent[]> {
-    const PK = `${TEACHER_ID_PREFIX}${teacherEmail}`;
-    const SK = `${STUDENT_ID_PREFIX}john@gmail.com`;
-    const { projectionExpression, projectionNames } =
-      projectionGenerator(TeacherStudent);
-
+  ): Promise<{ students: string[] }> {
     const command = new QueryCommand({
       TableName: TABLE_NAME,
-      KeyConditionExpression: '#pk = :pk AND #sk = :sk',
-      ProjectionExpression: projectionExpression,
+      KeyConditionExpression: '#pk = :pk AND begins_with(#sk, :sk)',
       ExpressionAttributeNames: {
         '#pk': 'PK',
         '#sk': 'SK',
-        ...projectionNames,
       },
       ExpressionAttributeValues: {
-        ':pk': PK,
-        ':sk': SK,
+        ':pk': `${TEACHER_ID_PREFIX}${teacherEmail}`,
+        ':sk': `STUDENT#`,
       },
+      ProjectionExpression: 'studentEmail',
     });
 
     try {
       const { Items = [] } = await client.send(command);
-      return Items as TeacherStudent[];
+      const listOfStudent = {
+        students: Items.map((item) => item.studentEmail),
+      };
+      return listOfStudent;
     } catch (error) {
       console.error('Unable to query the table. Error:', error);
       throw error;
@@ -73,7 +68,7 @@ class ListStudentsForTeachersHandler
     const teachersWithStudents =
       await this.listStudentsForTeachers(teacherEmail);
 
-    if (teachersWithStudents.length === 0) {
+    if (teachersWithStudents.students.length === 0) {
       throw new NotFoundException(`No teachers with any students found`);
     }
     return teachersWithStudents;
