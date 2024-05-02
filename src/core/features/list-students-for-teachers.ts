@@ -2,8 +2,9 @@ import {
   Controller,
   Get,
   Module,
-  Param,
+  Query,
   NotFoundException,
+  ParseArrayPipe,
 } from '@nestjs/common';
 import {
   IQueryHandler,
@@ -16,17 +17,18 @@ import { client } from 'src/aws-config/dynamoDBClient';
 import { TEACHER_ID_PREFIX } from '../utils/constants';
 
 const { TABLE_NAME } = process.env;
-
 class ListStudentsForTeachersQuery {
-  constructor(public readonly teacherEmail: string) {}
+  constructor(public readonly teacherEmail: string[]) {}
 }
 
 @Controller()
 class ListStudentsForTeachersController {
   constructor(private readonly queryBus: QueryBus) {}
 
-  @Get('commonstudents/:teacher')
-  getStudentsList(@Param('teacher') teacher: string) {
+  @Get('commonstudents')
+  getStudentsList(
+    @Query('teacher', new ParseArrayPipe({ items: String })) teacher: string[],
+  ) {
     return this.queryBus.execute(new ListStudentsForTeachersQuery(teacher));
   }
 }
@@ -35,43 +37,51 @@ class ListStudentsForTeachersController {
 class ListStudentsForTeachersHandler
   implements IQueryHandler<ListStudentsForTeachersQuery>
 {
-  async listStudentsForTeachers(
-    teacherEmail: string,
-  ): Promise<{ students: string[] }> {
-    const command = new QueryCommand({
-      TableName: TABLE_NAME,
-      KeyConditionExpression: '#pk = :pk AND begins_with(#sk, :sk)',
-      ExpressionAttributeNames: {
-        '#pk': 'PK',
-        '#sk': 'SK',
-      },
-      ExpressionAttributeValues: {
-        ':pk': `${TEACHER_ID_PREFIX}${teacherEmail}`,
-        ':sk': `STUDENT#`,
-      },
-      ProjectionExpression: 'studentEmail',
-    });
+  async listStudentsForTeachers(teacherEmails: string[]): Promise<string[][]> {
+    const studentListCollection: string[][] = [];
+    for (const email of teacherEmails) {
+      const command = new QueryCommand({
+        TableName: TABLE_NAME,
+        KeyConditionExpression: '#pk = :pk AND begins_with(#sk, :sk)',
+        ExpressionAttributeNames: {
+          '#pk': 'PK',
+          '#sk': 'SK',
+        },
+        ExpressionAttributeValues: {
+          ':pk': `${TEACHER_ID_PREFIX}${email}`,
+          ':sk': `STUDENT#`,
+        },
+        ProjectionExpression: 'studentEmail',
+      });
 
-    try {
-      const { Items = [] } = await client.send(command);
-      const listOfStudent = {
-        students: Items.map((item) => item.studentEmail),
-      };
-      return listOfStudent;
-    } catch (error) {
-      console.error('Unable to query the table. Error:', error);
-      throw error;
+      try {
+        const { Items = [] } = await client.send(command);
+        const listOfStudent: string[] = Items.map((item) => item.studentEmail);
+        studentListCollection.push(listOfStudent);
+      } catch (error) {
+        console.error('Unable to query the table. Error:', error);
+        throw error;
+      }
     }
+    return studentListCollection;
   }
 
   async execute({ teacherEmail }: ListStudentsForTeachersQuery) {
-    const teachersWithStudents =
+    const studentListCollection =
       await this.listStudentsForTeachers(teacherEmail);
 
-    if (teachersWithStudents.students.length === 0) {
+    if (studentListCollection.length === 0) {
       throw new NotFoundException(`No teachers with any students found`);
     }
-    return teachersWithStudents;
+
+    const commonStudents = studentListCollection.reduce((acc, currArray) => {
+      return acc.filter((value) => currArray.includes(value));
+    });
+
+    if (studentListCollection.length === 1 && teacherEmail.length === 1) {
+      commonStudents.push(`student_only_under_teacher_${teacherEmail[0]}`);
+    }
+    return { students: commonStudents };
   }
 }
 
