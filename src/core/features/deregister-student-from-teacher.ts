@@ -46,14 +46,14 @@ class DeregisterStudentFromTeacherHandler
   async execute({ deleteFromTeacherDto }: DeregisterStudentCommand) {
     const teacherEmail = deleteFromTeacherDto.teacher;
     const studentEmail = deleteFromTeacherDto.student;
-    const teacher = await this.teachers.one(teacherEmail);
-    if (!teacher) {
-      throw new NotFoundException(`Teacher, Email ${teacherEmail}, not found`);
-    }
-
-    const student = await this.students.one(studentEmail);
-    if (!student) {
-      throw new NotFoundException(`Student, Email ${studentEmail}, not found`);
+    const teacherStudent = await this.teacherStudents.one(
+      teacherEmail,
+      studentEmail,
+    );
+    if (!teacherStudent) {
+      throw new NotFoundException(
+        `Student, Email ${studentEmail}, is not registered to Teacher, Email ${teacherEmail}`,
+      );
     }
 
     return this.teacherStudents.removeStudentFromTeacher(
