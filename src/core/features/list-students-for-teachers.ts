@@ -70,13 +70,21 @@ class ListStudentsForTeachersHandler
     const studentListCollection =
       await this.listStudentsForTeachers(teacherEmail);
 
-    if (studentListCollection.length === 0) {
-      throw new NotFoundException(`No teachers with any students found`);
-    }
-
     const commonStudents = studentListCollection.reduce((acc, currArray) => {
       return acc.filter((value) => currArray.includes(value));
     });
+
+    if (commonStudents.length === 0 && teacherEmail.length > 1) {
+      throw new NotFoundException(
+        `There are no common students among the list of teachers`,
+      );
+    }
+
+    if (commonStudents.length === 0 && teacherEmail.length === 1) {
+      throw new NotFoundException(
+        `There are no students registered to teacher, Email ${teacherEmail[0]}`,
+      );
+    }
 
     if (studentListCollection.length === 1 && teacherEmail.length === 1) {
       commonStudents.push(`student_only_under_teacher_${teacherEmail[0]}`);
