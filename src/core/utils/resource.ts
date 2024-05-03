@@ -20,7 +20,7 @@ export function IDENTITY<T>(value: T): T {
   return value;
 }
 
-interface CreateItem {
+export interface CreateItem {
   dto: DTO;
   parentId?: string;
   decorator?: (obj: any) => any;
