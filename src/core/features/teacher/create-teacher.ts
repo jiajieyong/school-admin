@@ -14,7 +14,7 @@ import {
 
 import { CreateTeacherDto, ITeachersResource } from 'src/core';
 
-class CreateTeacherCommand {
+export class CreateTeacherCommand {
   constructor(public readonly createTeacherDto: CreateTeacherDto) {}
 }
 
