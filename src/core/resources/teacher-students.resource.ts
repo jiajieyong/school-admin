@@ -54,6 +54,7 @@ function generateDecorator(teacher: Teacher) {
       studentEmail: addStudentDto.email,
       teacherName: teacher.name,
       teacherEmail: teacher.email,
+      /* for fetching all teachers that a student registered to*/
       GSI1PK: addStudentDto.SK,
       GSI1SK: addStudentDto.PK,
     };

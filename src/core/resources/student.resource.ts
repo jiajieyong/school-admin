@@ -26,7 +26,8 @@ function decorateStudent(
   return {
     ...student,
     createdAt: student.createdAt.toISOString(),
-    GSI1PK: student.PK,
+    /* for fetching all students */
+    GSI1PK: 'STUDENT_INDEX',
     GSI1SK: student.SK,
   };
 }

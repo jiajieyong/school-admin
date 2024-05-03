@@ -29,8 +29,8 @@ function decorateTeacher(
   return {
     ...teacher,
     createdAt: teacher.createdAt.toISOString(),
-    /* for fetching classes */
-    GSI1PK: teacher.PK,
+    /* for fetching all teachers */
+    GSI1PK: 'TEACHER_INDEX',
     GSI1SK: teacher.SK,
   };
 }
