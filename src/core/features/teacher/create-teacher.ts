@@ -19,7 +19,7 @@ export class CreateTeacherCommand {
 }
 
 @Controller()
-class CreateTeacherController {
+export class CreateTeacherController {
   constructor(private readonly commandBus: CommandBus) {}
 
   @Post('teachers')
@@ -29,7 +29,9 @@ class CreateTeacherController {
 }
 
 @CommandHandler(CreateTeacherCommand)
-class CreateTeacherHandler implements ICommandHandler<CreateTeacherCommand> {
+export class CreateTeacherHandler
+  implements ICommandHandler<CreateTeacherCommand>
+{
   constructor(private readonly Teachers: ITeachersResource) {}
 
   async execute({ createTeacherDto }: CreateTeacherCommand) {
