@@ -5,10 +5,7 @@ import {
   GetTeachersWithStudentsController,
   GetTeachersWithStudentsHandler,
 } from './get-all-teachers';
-import { QueryCommand } from '@aws-sdk/client-dynamodb';
 import { client } from 'src/aws-config/dynamoDBClient';
-
-const { TABLE_NAME } = process.env;
 
 const mockResult = {
   teachers: [

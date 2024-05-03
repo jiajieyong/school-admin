@@ -52,7 +52,6 @@ export class GetTeachersWithStudentsHandler
       const teacherEmails: string[] = Items.map((item) => item.email);
       return teacherEmails;
     } catch (error) {
-      console.error('Unable to query the table. Error:', error);
       throw error;
     }
   }
