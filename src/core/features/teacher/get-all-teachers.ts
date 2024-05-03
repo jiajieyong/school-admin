@@ -10,17 +10,17 @@ import { QueryCommand } from '@aws-sdk/lib-dynamodb';
 import { TEACHER_ID_PREFIX } from '../../utils/constants';
 
 const { TABLE_NAME } = process.env;
-interface ITeacher {
+export interface ITeacher {
   email: string;
   students: string[];
 }
 
-class GetTeachersWithStudentsQuery {
+export class GetTeachersWithStudentsQuery {
   constructor() {}
 }
 
 @Controller()
-class GetTeachersWithStudentsController {
+export class GetTeachersWithStudentsController {
   constructor(private readonly queryBus: QueryBus) {}
 
   @Get('teachers')
@@ -30,7 +30,7 @@ class GetTeachersWithStudentsController {
 }
 
 @QueryHandler(GetTeachersWithStudentsQuery)
-class GetTeachersWithStudentsHandler
+export class GetTeachersWithStudentsHandler
   implements IQueryHandler<GetTeachersWithStudentsQuery>
 {
   async getAllTeachersEmail(): Promise<string[]> {
@@ -83,7 +83,6 @@ class GetTeachersWithStudentsHandler
 
         teacherwithStudentListCollection.push(teacher);
       } catch (error) {
-        console.error('Unable to query the table. Error:', error);
         throw error;
       }
     }
