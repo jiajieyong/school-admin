@@ -14,7 +14,7 @@ import {
 } from '@nestjs/cqrs';
 import { QueryCommand } from '@aws-sdk/lib-dynamodb';
 import { client } from 'src/aws-config/dynamoDBClient';
-import { TEACHER_ID_PREFIX } from '../utils/constants';
+import { TEACHER_ID_PREFIX } from '../../utils/constants';
 
 const { TABLE_NAME } = process.env;
 class ListStudentsForTeachersQuery {

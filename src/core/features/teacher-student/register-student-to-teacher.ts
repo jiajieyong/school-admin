@@ -17,7 +17,7 @@ import {
   ITeachersResource,
   IStudentsResource,
 } from 'src/core';
-import { ITeacherStudentsResource } from '../contracts/teacher-students.interface';
+import { ITeacherStudentsResource } from '../../contracts/teacher-students.interface';
 
 class RegisterStudentsToTeacherCommand {
   constructor(

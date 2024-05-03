@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
-import { CreateStudentModule } from '../features/create-student';
-import { GetStudentsWithTeachersModule } from '../features/get-all-students';
+import {
+  CreateStudentModule,
+  GetStudentsWithTeachersModule,
+} from '../features';
 
 @Module({
   imports: [CreateStudentModule, GetStudentsWithTeachersModule],
