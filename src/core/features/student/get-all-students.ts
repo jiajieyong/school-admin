@@ -7,8 +7,14 @@ import {
 } from '@nestjs/cqrs';
 import { client } from 'src/aws-config/dynamoDBClient';
 import { QueryCommand } from '@aws-sdk/lib-dynamodb';
+import { STUDENT_ID_PREFIX } from '../../utils/constants';
 
 const { TABLE_NAME } = process.env;
+
+interface IStudent {
+  email: string;
+  teachers: string[];
+}
 
 class GetStudentsWithTeachersQuery {
   constructor() {}
@@ -28,7 +34,7 @@ class GetStudentsWithTeachersController {
 class GetStudentsWithTeachersHandler
   implements IQueryHandler<GetStudentsWithTeachersQuery>
 {
-  async getStudentsWithTeachers(): Promise<Record<string, any>[]> {
+  async getAllStudentsEmail(): Promise<string[]> {
     const command = new QueryCommand({
       TableName: TABLE_NAME,
       IndexName: 'GSI1',
@@ -39,20 +45,58 @@ class GetStudentsWithTeachersHandler
       ExpressionAttributeValues: {
         ':pk': `STUDENT_INDEX`,
       },
+      ProjectionExpression: 'email',
     });
 
     try {
       const { Items = [] } = await client.send(command);
-      return Items;
+      const studentEmails: string[] = Items.map((item) => item.email);
+      return studentEmails;
     } catch (error) {
       console.error('Unable to query the table. Error:', error);
       throw error;
     }
   }
 
+  async listTeachersForStudents(studentEmails: string[]): Promise<IStudent[]> {
+    const teacherwithStudentListCollection: IStudent[] = [];
+    for (const email of studentEmails) {
+      const command = new QueryCommand({
+        TableName: TABLE_NAME,
+        IndexName: 'GSI1',
+        KeyConditionExpression: '#pk = :pk AND begins_with(#sk, :sk)',
+        ExpressionAttributeNames: {
+          '#pk': 'GSI1PK',
+          '#sk': 'GSI1SK',
+        },
+        ExpressionAttributeValues: {
+          ':pk': `${STUDENT_ID_PREFIX}${email}`,
+          ':sk': `TEACHER#`,
+        },
+        ProjectionExpression: 'teacherEmail',
+      });
+
+      try {
+        const { Items = [] } = await client.send(command);
+        const student: IStudent = {
+          email: email,
+          teachers: Items.map((item) => item.teacherEmail),
+        };
+
+        teacherwithStudentListCollection.push(student);
+      } catch (error) {
+        console.error('Unable to query the table. Error:', error);
+        throw error;
+      }
+    }
+    return teacherwithStudentListCollection;
+  }
+
   async execute() {
-    const result = await this.getStudentsWithTeachers();
-    return result;
+    const studentEmails = await this.getAllStudentsEmail();
+    const result = await this.listTeachersForStudents(studentEmails);
+
+    return { students: result };
   }
 }
 
