@@ -84,10 +84,6 @@ export abstract class Resource<T extends Record<keyof T, any>>
     };
   }
 
-  private stripSkPrefix(sk: string): string {
-    return sk.substring(this.skPrefix.length);
-  }
-
   async create({
     decorator = IDENTITY,
     dto,
