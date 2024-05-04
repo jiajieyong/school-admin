@@ -104,7 +104,7 @@ export abstract class Resource<T extends Record<keyof T, any>>
       Item: item,
     });
     await this.client.send(command);
-    return item.id;
+    return item;
   }
 
   async one(...args: [string, string?]): Promise<T | undefined> {

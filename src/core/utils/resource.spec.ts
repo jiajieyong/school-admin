@@ -1,7 +1,15 @@
 import { Resource, CreateItem, IDENTITY } from './Resource';
-import { DynamoDBDocumentClient } from '@aws-sdk/lib-dynamodb';
+import {
+  DynamoDBDocumentClient,
+  GetCommand,
+  PutCommand,
+} from '@aws-sdk/lib-dynamodb';
 
-class TestResource extends Resource<any> {
+const mockDynamoDBDocumentClient: jest.Mocked<DynamoDBDocumentClient> = {
+  send: jest.fn(), // Mock the send method
+} as any;
+
+class TestResource extends Resource<Record<string, any>> {
   constructor(protected readonly client: DynamoDBDocumentClient) {
     super({
       entityTemplate: Object,
@@ -9,33 +17,48 @@ class TestResource extends Resource<any> {
     });
   }
 
-  // Override the abstract methods of Resource with concrete implementations suitable for testing
   async create({
     decorator = IDENTITY,
     dto,
     parentId,
   }: CreateItem): Promise<string | undefined> {
-    // Implement a mock behavior for create method suitable for testing
-    const createdAt = new Date();
     const pk = parentId || dto.email;
     const sk = dto.email;
     const primaryKey = {
       PK: `MOCK_TEST#${pk}`,
       SK: `MOCK_TEST#${sk}`,
     };
-    decorator.call(this, { ...primaryKey, ...dto, createdAt });
+    const item = decorator.call(this, { ...primaryKey, ...dto });
 
-    // Mock sending the command
-    // This is just a mock implementation for testing, no actual command is sent
-    return 'Created';
+    const command = new PutCommand({
+      TableName: this.tableName,
+      Item: item,
+    });
+    await mockDynamoDBDocumentClient.send(command);
+    return item;
   }
 
-  async one() {
-    return { email: 'test@example.com' }; // Mock implementation for testing
+  async one(pk: string, sk?: string): Promise<Record<string, any> | undefined> {
+    const command = new GetCommand({
+      TableName: this.tableName,
+      Key: {
+        PK: `MOCK_TEST#${pk}`,
+        SK: `MOCK_TEST#${sk}`,
+      },
+    });
+
+    // Use the mock implementation of DynamoDBDocumentClient
+    const { Item } = await mockDynamoDBDocumentClient.send(command);
+
+    if (!Item) {
+      return undefined;
+    }
+
+    return Item as Record<string, any>;
   }
 
   async remove() {
-    return 'Removed'; // Mock implementation for testing
+    return 'Removed';
   }
 }
 
@@ -43,25 +66,63 @@ describe('Resource', () => {
   let resource: TestResource;
 
   beforeEach(() => {
-    const clientMock = {} as DynamoDBDocumentClient; // Mock DynamoDB client
+    const clientMock = {} as DynamoDBDocumentClient;
     resource = new TestResource(clientMock);
+  });
+
+  afterEach(() => {
+    mockDynamoDBDocumentClient.send.mockReset();
   });
 
   describe('create', () => {
     it('should create an item', async () => {
+      const mockItem = {
+        PK: 'MOCK_TEST#test@example.com',
+        SK: 'MOCK_TEST#test@example.com',
+        name: 'testName',
+        email: 'test@example.com',
+      };
+
+      // Mock the response of the send method
+      mockDynamoDBDocumentClient.send.mockResolvedValueOnce({
+        Item: mockItem,
+      } as never);
+
+      // Call the create method
       const result = await resource.create({
-        decorator: IDENTITY,
-        dto: {},
-        parentId: undefined,
+        dto: {
+          name: 'testName',
+          email: 'test@example.com',
+        },
       });
-      expect(result).toBe('Created');
+
+      // Assert that the send method was called with the correct PutCommand
+      expect(mockDynamoDBDocumentClient.send).toHaveBeenCalledTimes(1);
+      expect(mockDynamoDBDocumentClient.send).toHaveBeenCalledWith(
+        expect.any(PutCommand),
+      );
+
+      // Assert that the result matches the expected value
+      expect(result).toEqual(mockItem);
     });
   });
 
   describe('one', () => {
     it('should get an item', async () => {
-      const result = await resource.one();
-      expect(result).toEqual({ email: 'test@example.com' });
+      const mockItem = { pk: '123', sk: 'Test Item' };
+      mockDynamoDBDocumentClient.send.mockResolvedValueOnce({
+        Item: mockItem,
+      } as never);
+
+      const itemId = '123';
+      const result = await resource.one(itemId);
+
+      // Assertions
+      expect(result).toEqual(mockItem);
+      expect(mockDynamoDBDocumentClient.send).toHaveBeenCalledTimes(1);
+      expect(mockDynamoDBDocumentClient.send).toHaveBeenCalledWith(
+        expect.any(GetCommand),
+      );
     });
   });
 
