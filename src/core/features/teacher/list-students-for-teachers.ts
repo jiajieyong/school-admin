@@ -17,12 +17,12 @@ import { client } from 'src/aws-config/dynamoDBClient';
 import { TEACHER_ID_PREFIX } from '../../utils/constants';
 
 const { TABLE_NAME } = process.env;
-class ListStudentsForTeachersQuery {
+export class ListStudentsForTeachersQuery {
   constructor(public readonly teacherEmail: string[]) {}
 }
 
 @Controller()
-class ListStudentsForTeachersController {
+export class ListStudentsForTeachersController {
   constructor(private readonly queryBus: QueryBus) {}
 
   @Get('commonstudents')

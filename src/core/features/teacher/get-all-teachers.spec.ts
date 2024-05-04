@@ -43,8 +43,8 @@ describe('GetTeachersWithStudentsController', () => {
     );
   });
 
-  describe('createTeacher', () => {
-    it('should return "Teacher created"', async () => {
+  describe('getStudentsList', () => {
+    it('should return a list of teachers with students assigned', async () => {
       expect(await controller.getStudentsList()).toBe(mockResult);
     });
   });
