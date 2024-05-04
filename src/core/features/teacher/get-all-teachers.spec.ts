@@ -5,16 +5,8 @@ import {
   GetTeachersWithStudentsController,
   GetTeachersWithStudentsHandler,
 } from './get-all-teachers';
-import { client } from 'src/aws-config/dynamoDBClient';
-
-const mockResult = {
-  teachers: [
-    {
-      email: 'test@test.com',
-      students: ['stud1@test.com', 'stud2@test.com'],
-    },
-  ],
-};
+import { mockClient } from 'aws-sdk-client-mock';
+import { DynamoDBDocumentClient, QueryCommand } from '@aws-sdk/lib-dynamodb';
 
 describe('GetTeachersWithStudentsQuery', () => {
   it('should create a GetTeachersWithStudentsQuery instance', () => {
@@ -25,6 +17,14 @@ describe('GetTeachersWithStudentsQuery', () => {
 
 describe('GetTeachersWithStudentsController', () => {
   let controller: GetTeachersWithStudentsController;
+  const mockResult = {
+    teachers: [
+      {
+        email: 'test@test.com',
+        students: ['stud1@test.com', 'stud2@test.com'],
+      },
+    ],
+  };
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
@@ -50,38 +50,84 @@ describe('GetTeachersWithStudentsController', () => {
   });
 });
 
-describe('GetTeachersWithStudentsHandler - getAllTeachersEmail', () => {
+describe('GetTeachersWithStudentsHandler', () => {
   let handler: GetTeachersWithStudentsHandler;
-  let sendMock: jest.Mock;
+  const ddbMock = mockClient(DynamoDBDocumentClient);
 
   beforeEach(() => {
-    sendMock = jest.fn().mockResolvedValue({
-      Items: [
-        { email: 'teacher1@example.com' },
-        { email: 'teacher2@example.com' },
-      ],
-    });
-
-    client.send = sendMock;
-
+    ddbMock.reset();
     handler = new GetTeachersWithStudentsHandler();
   });
 
-  it('should return array of teacher emails', async () => {
-    const teacherEmails = await handler.getAllTeachersEmail();
+  describe('getAllTeachersEmail', () => {
+    it('should return array of teacher emails', async () => {
+      ddbMock.on(QueryCommand).resolves({
+        Items: [
+          { email: 'teacher1@example.com' },
+          { email: 'teacher2@example.com' },
+        ],
+      });
 
-    expect(teacherEmails).toEqual([
-      'teacher1@example.com',
-      'teacher2@example.com',
-    ]);
-    expect(sendMock).toHaveBeenCalledTimes(1); // Ensure one query was made
+      const teacherEmails = await handler.getAllTeachersEmail();
+
+      expect(teacherEmails).toEqual([
+        'teacher1@example.com',
+        'teacher2@example.com',
+      ]);
+    });
+
+    it('should throw error if query fails', async () => {
+      const error = new Error('Query failed');
+      ddbMock.on(QueryCommand).rejects('Query failed');
+
+      await expect(handler.getAllTeachersEmail()).rejects.toThrow(error);
+    });
   });
 
-  it('should throw error if query fails', async () => {
-    const error = new Error('Query failed');
-    sendMock.mockRejectedValue(error);
+  describe('listStudentsForTeachers', () => {
+    it('should return array of teacher and their corresponding students under them', async () => {
+      ddbMock
+        .on(QueryCommand)
+        .resolvesOnce({
+          Items: [
+            { studentEmail: 'student1@example.com' },
+            { studentEmail: 'student2@example.com' },
+          ],
+        })
+        .resolvesOnce({
+          Items: [
+            { studentEmail: 'student3@example.com' },
+            { studentEmail: 'student4@example.com' },
+          ],
+        });
 
-    await expect(handler.getAllTeachersEmail()).rejects.toThrow(error);
-    expect(sendMock).toHaveBeenCalledTimes(1); // Ensure one query was made
+      const listStudentsForTeachers = await handler.listStudentsForTeachers([
+        'teacher1@example.com',
+        'teacher2@example.com',
+      ]);
+
+      expect(listStudentsForTeachers).toEqual([
+        {
+          email: 'teacher1@example.com',
+          students: ['student1@example.com', 'student2@example.com'],
+        },
+        {
+          email: 'teacher2@example.com',
+          students: ['student3@example.com', 'student4@example.com'],
+        },
+      ]);
+    });
+
+    it('should throw error if query fails', async () => {
+      const error = new Error('Query failed');
+      ddbMock.on(QueryCommand).rejects('Query failed');
+
+      await expect(
+        handler.listStudentsForTeachers([
+          'teacher1@example.com',
+          'teacher2@example.com',
+        ]),
+      ).rejects.toThrow(error);
+    });
   });
 });
