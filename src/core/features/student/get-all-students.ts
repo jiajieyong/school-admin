@@ -16,12 +16,12 @@ interface IStudent {
   teachers: string[];
 }
 
-class GetStudentsWithTeachersQuery {
+export class GetStudentsWithTeachersQuery {
   constructor() {}
 }
 
 @Controller()
-class GetStudentsWithTeachersController {
+export class GetStudentsWithTeachersController {
   constructor(private readonly queryBus: QueryBus) {}
 
   @Get('Students')
@@ -31,7 +31,7 @@ class GetStudentsWithTeachersController {
 }
 
 @QueryHandler(GetStudentsWithTeachersQuery)
-class GetStudentsWithTeachersHandler
+export class GetStudentsWithTeachersHandler
   implements IQueryHandler<GetStudentsWithTeachersQuery>
 {
   async getAllStudentsEmail(): Promise<string[]> {
@@ -53,7 +53,6 @@ class GetStudentsWithTeachersHandler
       const studentEmails: string[] = Items.map((item) => item.email);
       return studentEmails;
     } catch (error) {
-      console.error('Unable to query the table. Error:', error);
       throw error;
     }
   }
@@ -85,7 +84,6 @@ class GetStudentsWithTeachersHandler
 
         teacherwithStudentListCollection.push(student);
       } catch (error) {
-        console.error('Unable to query the table. Error:', error);
         throw error;
       }
     }
