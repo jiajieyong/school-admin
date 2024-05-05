@@ -43,7 +43,7 @@ export class StudentAlreadyAssignedException extends ConflictException {
   }
 }
 
-export class StudentNotAssignedException extends ConflictException {
+export class StudentNotAssignedException extends NotFoundException {
   constructor(studentEmail: string, teacherEmail: string) {
     super(
       `Student, Email ${studentEmail}, is not registered to Teacher, Email ${teacherEmail}`,
