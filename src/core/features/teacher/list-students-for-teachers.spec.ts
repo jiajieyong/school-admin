@@ -152,7 +152,7 @@ describe('execute', () => {
     expect(handler.listStudentsForTeachers).toHaveBeenCalledTimes(1);
   });
 
-  it('should return NotFoundException when there are no common students', async () => {
+  it('throws NoCommonStudentsFoundException when there are no common students', async () => {
     handler.listStudentsForTeachers = jest.fn().mockResolvedValue([
       ['student1@example.com', 'student2@example.com', 'student3@example.com'],
       ['student5@example.com', 'student6@example.com', 'student4@example.com'],
@@ -167,7 +167,7 @@ describe('execute', () => {
     expect(handler.listStudentsForTeachers).toHaveBeenCalledTimes(1);
   });
 
-  it('should return NotFoundException when there are no students under teacher', async () => {
+  it('throws NoStudentRegisteredException when there are no students under teacher', async () => {
     handler.listStudentsForTeachers = jest.fn().mockResolvedValue([[]]);
 
     await expect(

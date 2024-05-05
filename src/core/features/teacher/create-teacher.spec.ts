@@ -73,7 +73,7 @@ describe('CreateTeacherHandler', () => {
     );
   });
 
-  it('should throw a ConflictException when the teacher already exists', async () => {
+  it('throws a TeacherAlreadyExistsException when the teacher already exists', async () => {
     teachersResourceMock.one.mockResolvedValueOnce(mockTeacherDTO);
 
     await expect(

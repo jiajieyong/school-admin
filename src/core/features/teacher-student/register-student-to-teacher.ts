@@ -17,14 +17,14 @@ import {
   TeacherNotFoundException,
 } from '../../utils/exceptions';
 
-class RegisterStudentsToTeacherCommand {
+export class RegisterStudentsToTeacherCommand {
   constructor(
     public readonly registerStudentDto: RegisterStudentsToTeacherDto,
   ) {}
 }
 
 @Controller()
-class RegisterStudentToTeacherController {
+export class RegisterStudentToTeacherController {
   constructor(private readonly commandBus: CommandBus) {}
 
   @Post('register')
@@ -38,7 +38,7 @@ class RegisterStudentToTeacherController {
 }
 
 @CommandHandler(RegisterStudentsToTeacherCommand)
-class RegisterStudentToTeacherHandler
+export class RegisterStudentToTeacherHandler
   implements ICommandHandler<RegisterStudentsToTeacherCommand>
 {
   constructor(
