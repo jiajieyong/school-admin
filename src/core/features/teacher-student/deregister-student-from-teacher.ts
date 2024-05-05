@@ -1,10 +1,4 @@
-import {
-  Controller,
-  Delete,
-  Module,
-  Body,
-  NotFoundException,
-} from '@nestjs/common';
+import { Controller, Delete, Module, Body } from '@nestjs/common';
 import {
   CommandBus,
   CommandHandler,
@@ -17,6 +11,7 @@ import {
   ITeachersResource,
   ITeacherStudentsResource,
 } from 'src/core';
+import { StudentNotAssignedException } from '../../utils/exceptions';
 
 class DeregisterStudentCommand {
   constructor(public readonly deleteFromTeacherDto: DeleteFromTeacherDto) {}
@@ -51,9 +46,7 @@ class DeregisterStudentFromTeacherHandler
       studentEmail,
     );
     if (!teacherStudent) {
-      throw new NotFoundException(
-        `Student, Email ${studentEmail}, is not registered to Teacher, Email ${teacherEmail}`,
-      );
+      throw new StudentNotAssignedException(studentEmail, teacherEmail);
     }
 
     return this.teacherStudents.removeStudentFromTeacher(

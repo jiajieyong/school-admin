@@ -1,11 +1,4 @@
-import {
-  Body,
-  ConflictException,
-  Controller,
-  Module,
-  NotFoundException,
-  Post,
-} from '@nestjs/common';
+import { Body, Controller, Module, Post } from '@nestjs/common';
 import {
   CommandBus,
   CommandHandler,
@@ -18,6 +11,11 @@ import {
   IStudentsResource,
 } from 'src/core';
 import { ITeacherStudentsResource } from '../../contracts/teacher-students.interface';
+import {
+  StudentAlreadyAssignedException,
+  StudentNotFoundException,
+  TeacherNotFoundException,
+} from '../../utils/exceptions';
 
 class RegisterStudentsToTeacherCommand {
   constructor(
@@ -52,17 +50,13 @@ class RegisterStudentToTeacherHandler
   async execute({ registerStudentDto }: RegisterStudentsToTeacherCommand) {
     const teacher = await this.teachers.one(registerStudentDto.teacher);
     if (!teacher) {
-      throw new NotFoundException(
-        `Teacher, Email ${registerStudentDto.teacher}, not found`,
-      );
+      throw new TeacherNotFoundException(registerStudentDto.teacher);
     }
 
     for (const studentEmail of registerStudentDto.students) {
       const student = await this.students.one(studentEmail);
       if (!student) {
-        throw new NotFoundException(
-          `Student, Email ${studentEmail}, not found`,
-        );
+        throw new StudentNotFoundException(studentEmail);
       }
 
       const teacherStudent = await this.teacherStudents.one(
@@ -70,9 +64,7 @@ class RegisterStudentToTeacherHandler
         studentEmail,
       );
       if (teacherStudent) {
-        throw new ConflictException(
-          `Student, email ${studentEmail}, already assigned to Teacher, email ${teacher.email}`,
-        );
+        throw new StudentAlreadyAssignedException(studentEmail, teacher.email);
       }
 
       this.teacherStudents.addStudent(teacher, student);

@@ -1,11 +1,4 @@
-import {
-  Controller,
-  Get,
-  Module,
-  Query,
-  NotFoundException,
-  ParseArrayPipe,
-} from '@nestjs/common';
+import { Controller, Get, Module, Query, ParseArrayPipe } from '@nestjs/common';
 import {
   IQueryHandler,
   QueryHandler,
@@ -15,6 +8,10 @@ import {
 import { QueryCommand } from '@aws-sdk/lib-dynamodb';
 import { client } from 'src/aws-config/dynamoDBClient';
 import { TEACHER_ID_PREFIX } from '../../utils/constants';
+import {
+  NoCommonStudentsFoundException,
+  NoStudentRegisteredException,
+} from '../../utils/exceptions';
 
 const { TABLE_NAME } = process.env;
 export class ListStudentsForTeachersQuery {
@@ -74,15 +71,11 @@ export class ListStudentsForTeachersHandler
     });
 
     if (commonStudents.length === 0 && teacherEmail.length > 1) {
-      throw new NotFoundException(
-        `There are no common students among the list of teachers`,
-      );
+      throw new NoCommonStudentsFoundException();
     }
 
     if (commonStudents.length === 0 && teacherEmail.length === 1) {
-      throw new NotFoundException(
-        `There are no students registered to teacher, Email ${teacherEmail[0]}`,
-      );
+      throw new NoStudentRegisteredException(teacherEmail[0]);
     }
 
     if (studentListCollection.length === 1 && teacherEmail.length === 1) {

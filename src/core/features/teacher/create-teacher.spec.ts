@@ -6,7 +6,7 @@ import {
   CreateTeacherHandler,
 } from './create-teacher';
 import { ITeachersResource } from 'src/core';
-import { ConflictException } from '@nestjs/common';
+import { TeacherAlreadyExistsException } from '../../utils/exceptions';
 
 const mockTeacherDTO = {
   name: 'Test',
@@ -78,6 +78,6 @@ describe('CreateTeacherHandler', () => {
 
     await expect(
       handler.execute(new CreateTeacherCommand(mockTeacherDTO)),
-    ).rejects.toThrow(ConflictException);
+    ).rejects.toThrow(new TeacherAlreadyExistsException(mockTeacherDTO.email));
   });
 });

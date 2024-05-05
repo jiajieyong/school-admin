@@ -7,6 +7,10 @@ import {
   ListStudentsForTeachersController,
   ListStudentsForTeachersHandler,
 } from './list-students-for-teachers';
+import {
+  NoCommonStudentsFoundException,
+  NoStudentRegisteredException,
+} from '../../utils/exceptions';
 
 describe('ListStudentsForTeachersQuery', () => {
   it('should create a GetTeachersWithStudentsQuery instance', () => {
@@ -158,9 +162,7 @@ describe('execute', () => {
       handler.execute({
         teacherEmail: ['teacher1@example.com', 'teacher2@example.com'],
       }),
-    ).rejects.toThrow(
-      'There are no common students among the list of teachers',
-    );
+    ).rejects.toThrow(new NoCommonStudentsFoundException());
 
     expect(handler.listStudentsForTeachers).toHaveBeenCalledTimes(1);
   });
@@ -172,9 +174,7 @@ describe('execute', () => {
       handler.execute({
         teacherEmail: ['teacher1@example.com'],
       }),
-    ).rejects.toThrow(
-      'There are no students registered to teacher, Email teacher1@example.com',
-    );
+    ).rejects.toThrow(new NoStudentRegisteredException('teacher1@example.com'));
 
     expect(handler.listStudentsForTeachers).toHaveBeenCalledTimes(1);
   });

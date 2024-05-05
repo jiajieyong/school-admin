@@ -1,10 +1,4 @@
-import {
-  Body,
-  Controller,
-  Module,
-  Post,
-  ConflictException,
-} from '@nestjs/common';
+import { Body, Controller, Module, Post } from '@nestjs/common';
 import {
   CommandBus,
   CommandHandler,
@@ -13,6 +7,7 @@ import {
 } from '@nestjs/cqrs';
 
 import { CreateTeacherDto, ITeachersResource } from 'src/core';
+import { TeacherAlreadyExistsException } from 'src/core/utils/exceptions';
 
 export class CreateTeacherCommand {
   constructor(public readonly createTeacherDto: CreateTeacherDto) {}
@@ -37,9 +32,7 @@ export class CreateTeacherHandler
   async execute({ createTeacherDto }: CreateTeacherCommand) {
     const Teacher = await this.Teachers.one(createTeacherDto.email);
     if (Teacher) {
-      throw new ConflictException(
-        `Teacher, Email ${createTeacherDto.email}, already exists`,
-      );
+      throw new TeacherAlreadyExistsException(createTeacherDto.email);
     }
     return this.Teachers.addTeacher(createTeacherDto);
   }
