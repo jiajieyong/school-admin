@@ -13,12 +13,12 @@ import {
 } from 'src/core';
 import { StudentNotAssignedException } from '../../utils/exceptions';
 
-class DeregisterStudentCommand {
+export class DeregisterStudentCommand {
   constructor(public readonly deleteFromTeacherDto: DeleteFromTeacherDto) {}
 }
 
 @Controller()
-class DeregisterStudentFromTeacherController {
+export class DeregisterStudentFromTeacherController {
   constructor(private readonly commandBus: CommandBus) {}
   @Delete('deregister')
   deleteFromTeacher(@Body() deleteFromTeacherDto: DeleteFromTeacherDto) {
@@ -29,7 +29,7 @@ class DeregisterStudentFromTeacherController {
 }
 
 @CommandHandler(DeregisterStudentCommand)
-class DeregisterStudentFromTeacherHandler
+export class DeregisterStudentFromTeacherHandler
   implements ICommandHandler<DeregisterStudentCommand>
 {
   constructor(

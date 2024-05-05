@@ -9,8 +9,8 @@ import {
   RegisterStudentsToTeacherDto,
   ITeachersResource,
   IStudentsResource,
+  ITeacherStudentsResource,
 } from 'src/core';
-import { ITeacherStudentsResource } from '../../contracts/teacher-students.interface';
 import {
   StudentAlreadyAssignedException,
   StudentNotFoundException,
