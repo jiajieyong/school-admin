@@ -34,7 +34,7 @@ export class ListStudentsForTeachersController {
 }
 
 @QueryHandler(ListStudentsForTeachersQuery)
-class ListStudentsForTeachersHandler
+export class ListStudentsForTeachersHandler
   implements IQueryHandler<ListStudentsForTeachersQuery>
 {
   async listStudentsForTeachers(teacherEmails: string[]): Promise<string[][]> {
@@ -59,7 +59,6 @@ class ListStudentsForTeachersHandler
         const listOfStudent: string[] = Items.map((item) => item.studentEmail);
         studentListCollection.push(listOfStudent);
       } catch (error) {
-        console.error('Unable to query the table. Error:', error);
         throw error;
       }
     }

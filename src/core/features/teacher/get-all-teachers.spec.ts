@@ -1,3 +1,5 @@
+import { mockClient } from 'aws-sdk-client-mock';
+import { DynamoDBDocumentClient, QueryCommand } from '@aws-sdk/lib-dynamodb';
 import { QueryBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
 import {
@@ -5,8 +7,6 @@ import {
   GetTeachersWithStudentsController,
   GetTeachersWithStudentsHandler,
 } from './get-all-teachers';
-import { mockClient } from 'aws-sdk-client-mock';
-import { DynamoDBDocumentClient, QueryCommand } from '@aws-sdk/lib-dynamodb';
 
 describe('GetTeachersWithStudentsQuery', () => {
   it('should create a GetTeachersWithStudentsQuery instance', () => {
