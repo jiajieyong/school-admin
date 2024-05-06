@@ -157,7 +157,7 @@ Postman collection file included as well to test endpoints
     <tr>
       <td>Deregister student from teacher</td>
       <td>/</td>
-      <td>pk: DOCTOR#&lt;DoctorId&gt; sk: PATIENT#&lt;PatientId&gt;</td>
+      <td>pk: Teacher#&lt;TeacherEmail&gt; sk: Student#&lt;StudentEmail&gt;</td>
       <td>/</td>
     </tr>
     <tr>
