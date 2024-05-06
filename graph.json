@@ -1,0 +1,1165 @@
+{
+  "nodes": {
+    "58481777": {
+      "id": "58481777",
+      "label": "ExplorerService",
+      "parent": "-905679032",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "CqrsModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "ExplorerService"
+      }
+    },
+    "108015789": {
+      "id": "108015789",
+      "label": "ApplicationConfig",
+      "parent": "-905679032",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "CqrsModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ApplicationConfig"
+      }
+    },
+    "203550704": {
+      "id": "203550704",
+      "label": "ExternalContextCreator",
+      "parent": "555176277",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "InternalCoreModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": true,
+        "token": "ExternalContextCreator",
+        "initTime": 9.26689999999985
+      }
+    },
+    "225063248": {
+      "id": "225063248",
+      "label": "InternalCoreModule",
+      "parent": "555176277",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "InternalCoreModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "InternalCoreModule",
+        "initTime": 10.089999999999918
+      }
+    },
+    "233936880": {
+      "id": "233936880",
+      "label": "AppController",
+      "parent": "-19112576",
+      "metadata": {
+        "type": "controller",
+        "internal": false,
+        "sourceModuleName": "AppModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "AppController"
+      }
+    },
+    "441317749": {
+      "id": "441317749",
+      "label": "TeachersResource",
+      "parent": "-1609194173",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "DynamoModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": true,
+        "token": "ITeachersResource",
+        "initTime": 7.558699999999817
+      }
+    },
+    "512577864": {
+      "id": "512577864",
+      "label": "RegisterStudentToTeacherModule",
+      "metadata": {
+        "type": "module",
+        "global": false,
+        "dynamic": false,
+        "internal": false
+      }
+    },
+    "555176277": {
+      "id": "555176277",
+      "label": "InternalCoreModule",
+      "metadata": {
+        "type": "module",
+        "global": true,
+        "dynamic": true,
+        "internal": true
+      }
+    },
+    "643450742": {
+      "id": "643450742",
+      "label": "CqrsModule",
+      "parent": "-905679032",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "CqrsModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "CqrsModule"
+      }
+    },
+    "671882984": {
+      "id": "671882984",
+      "label": "Reflector",
+      "parent": "555176277",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "InternalCoreModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": true,
+        "token": "Reflector",
+        "initTime": 9.855999999999995
+      }
+    },
+    "808251669": {
+      "id": "808251669",
+      "label": "ApplicationConfig",
+      "parent": "-259102566",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "StudentModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ApplicationConfig"
+      }
+    },
+    "842552752": {
+      "id": "842552752",
+      "label": "StudentController",
+      "parent": "-259102566",
+      "metadata": {
+        "type": "controller",
+        "internal": false,
+        "sourceModuleName": "StudentModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "StudentController"
+      }
+    },
+    "909003965": {
+      "id": "909003965",
+      "label": "EventPublisher",
+      "parent": "-905679032",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "CqrsModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": true,
+        "token": "EventPublisher"
+      }
+    },
+    "1088908845": {
+      "id": "1088908845",
+      "label": "ApplicationConfig",
+      "parent": "512577864",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "RegisterStudentToTeacherModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ApplicationConfig"
+      }
+    },
+    "1317384048": {
+      "id": "1317384048",
+      "label": "DeleteTeacherController",
+      "parent": "-1610909994",
+      "metadata": {
+        "type": "controller",
+        "internal": false,
+        "sourceModuleName": "DeleteTeacherModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "DeleteTeacherController"
+      }
+    },
+    "1321985346": {
+      "id": "1321985346",
+      "label": "ModuleRef",
+      "parent": "512577864",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "RegisterStudentToTeacherModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ModuleRef"
+      }
+    },
+    "1380308652": {
+      "id": "1380308652",
+      "label": "DynamoModule",
+      "parent": "-1609194173",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "DynamoModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "DynamoModule",
+        "initTime": 8.43730000000005
+      }
+    },
+    "1390356109": {
+      "id": "1390356109",
+      "label": "StudentService",
+      "parent": "-259102566",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "StudentModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "StudentService",
+        "initTime": 7.356699999999819
+      }
+    },
+    "1434456218": {
+      "id": "1434456218",
+      "label": "Reflector",
+      "parent": "555176277",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "InternalCoreModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": true,
+        "token": "Reflector",
+        "initTime": 13.314399999999978
+      }
+    },
+    "1440848550": {
+      "id": "1440848550",
+      "label": "RegisterStudentToTeacherController",
+      "parent": "512577864",
+      "metadata": {
+        "type": "controller",
+        "internal": false,
+        "sourceModuleName": "RegisterStudentToTeacherModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "RegisterStudentToTeacherController"
+      }
+    },
+    "1490545095": {
+      "id": "1490545095",
+      "label": "ModuleRef",
+      "parent": "-2120771327",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "TeacherModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ModuleRef"
+      }
+    },
+    "1771390018": {
+      "id": "1771390018",
+      "label": "ModuleRef",
+      "parent": "-905679032",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "CqrsModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ModuleRef"
+      }
+    },
+    "1888919912": {
+      "id": "1888919912",
+      "label": "ApplicationConfig",
+      "parent": "-1609194173",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "DynamoModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ApplicationConfig"
+      }
+    },
+    "1919157847": {
+      "id": "1919157847",
+      "label": "REQUEST",
+      "parent": "555176277",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "InternalCoreModule",
+        "durable": false,
+        "static": false,
+        "scope": 2,
+        "transient": false,
+        "exported": true,
+        "token": "REQUEST",
+        "initTime": 8.414299999999912
+      }
+    },
+    "1969754704": {
+      "id": "1969754704",
+      "label": "DeleteTeacherHandler",
+      "parent": "-1610909994",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "DeleteTeacherModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "DeleteTeacherHandler"
+      }
+    },
+    "-1486320561": {
+      "id": "-1486320561",
+      "label": "ModuleRef",
+      "parent": "555176277",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "InternalCoreModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ModuleRef"
+      }
+    },
+    "-651043398": {
+      "id": "-651043398",
+      "label": "ApplicationConfig",
+      "parent": "555176277",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "InternalCoreModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ApplicationConfig"
+      }
+    },
+    "-255469305": {
+      "id": "-255469305",
+      "label": "INQUIRER",
+      "parent": "555176277",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "InternalCoreModule",
+        "durable": false,
+        "static": true,
+        "scope": 1,
+        "transient": true,
+        "exported": true,
+        "token": "INQUIRER",
+        "initTime": 8.404599999999846
+      }
+    },
+    "-26938366": {
+      "id": "-26938366",
+      "label": "ModulesContainer",
+      "parent": "555176277",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "InternalCoreModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": true,
+        "token": "ModulesContainer",
+        "initTime": 9.257699999999886
+      }
+    },
+    "-326832201": {
+      "id": "-326832201",
+      "label": "HttpAdapterHost",
+      "parent": "555176277",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "InternalCoreModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": true,
+        "token": "HttpAdapterHost",
+        "initTime": 9.241200000000163
+      }
+    },
+    "-702581189": {
+      "id": "-702581189",
+      "label": "LazyModuleLoader",
+      "parent": "555176277",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "InternalCoreModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": true,
+        "token": "LazyModuleLoader",
+        "initTime": 9.235899999999901
+      }
+    },
+    "-1904419534": {
+      "id": "-1904419534",
+      "label": "SerializedGraph",
+      "parent": "555176277",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "InternalCoreModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": true,
+        "token": "SerializedGraph",
+        "initTime": 9.214300000000094
+      }
+    },
+    "-19112576": {
+      "id": "-19112576",
+      "label": "AppModule",
+      "metadata": {
+        "type": "module",
+        "global": false,
+        "dynamic": false,
+        "internal": false
+      }
+    },
+    "-2139588960": {
+      "id": "-2139588960",
+      "label": "AppModule",
+      "parent": "-19112576",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "AppModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "AppModule",
+        "initTime": 9.198300000000017
+      }
+    },
+    "-71302842": {
+      "id": "-71302842",
+      "label": "ModuleRef",
+      "parent": "-19112576",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "AppModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ModuleRef"
+      }
+    },
+    "-2064622725": {
+      "id": "-2064622725",
+      "label": "ApplicationConfig",
+      "parent": "-19112576",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "AppModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ApplicationConfig"
+      }
+    },
+    "-2130614055": {
+      "id": "-2130614055",
+      "label": "AppService",
+      "parent": "-19112576",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "AppModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "AppService",
+        "initTime": 9.181499999999915
+      }
+    },
+    "-1609194173": {
+      "id": "-1609194173",
+      "label": "DynamoModule",
+      "metadata": {
+        "type": "module",
+        "global": true,
+        "dynamic": false,
+        "internal": false
+      }
+    },
+    "-1631247427": {
+      "id": "-1631247427",
+      "label": "ModuleRef",
+      "parent": "-1609194173",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "DynamoModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ModuleRef"
+      }
+    },
+    "-483597124": {
+      "id": "-483597124",
+      "label": "StudentsResource",
+      "parent": "-1609194173",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "DynamoModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": true,
+        "token": "IStudentsResource",
+        "initTime": 7.5207000000000335
+      }
+    },
+    "-259102566": {
+      "id": "-259102566",
+      "label": "StudentModule",
+      "metadata": {
+        "type": "module",
+        "global": false,
+        "dynamic": false,
+        "internal": false
+      }
+    },
+    "-1110728864": {
+      "id": "-1110728864",
+      "label": "StudentModule",
+      "parent": "-259102566",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "StudentModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "StudentModule",
+        "initTime": 7.514299999999821
+      }
+    },
+    "-942753440": {
+      "id": "-942753440",
+      "label": "ModuleRef",
+      "parent": "-259102566",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "StudentModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ModuleRef"
+      }
+    },
+    "-2120771327": {
+      "id": "-2120771327",
+      "label": "TeacherModule",
+      "metadata": {
+        "type": "module",
+        "global": false,
+        "dynamic": false,
+        "internal": false
+      }
+    },
+    "-361382208": {
+      "id": "-361382208",
+      "label": "TeacherModule",
+      "parent": "-2120771327",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "TeacherModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "TeacherModule",
+        "initTime": 7.327099999999973
+      }
+    },
+    "-1053417092": {
+      "id": "-1053417092",
+      "label": "ApplicationConfig",
+      "parent": "-2120771327",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "TeacherModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ApplicationConfig"
+      }
+    },
+    "-1134213349": {
+      "id": "-1134213349",
+      "label": "TeacherService",
+      "parent": "-2120771327",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "TeacherModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "TeacherService",
+        "initTime": 7.2931999999998425
+      }
+    },
+    "-1234153328": {
+      "id": "-1234153328",
+      "label": "TeacherController",
+      "parent": "-2120771327",
+      "metadata": {
+        "type": "controller",
+        "internal": false,
+        "sourceModuleName": "TeacherModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "TeacherController"
+      }
+    },
+    "-201006858": {
+      "id": "-201006858",
+      "label": "RegisterStudentToTeacherModule",
+      "parent": "512577864",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "RegisterStudentToTeacherModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "RegisterStudentToTeacherModule",
+        "initTime": 7.282100000000128
+      }
+    },
+    "-123270570": {
+      "id": "-123270570",
+      "label": "RegisterStudentToTeacherHandler",
+      "parent": "512577864",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "RegisterStudentToTeacherModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "RegisterStudentToTeacherHandler"
+      }
+    },
+    "-905679032": {
+      "id": "-905679032",
+      "label": "CqrsModule",
+      "metadata": {
+        "type": "module",
+        "global": false,
+        "dynamic": false,
+        "internal": false
+      }
+    },
+    "-77522000": {
+      "id": "-77522000",
+      "label": "CommandBus",
+      "parent": "-905679032",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "CqrsModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": true,
+        "token": "CommandBus",
+        "initTime": 8.866400000000112
+      }
+    },
+    "-1452901037": {
+      "id": "-1452901037",
+      "label": "QueryBus",
+      "parent": "-905679032",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "CqrsModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": true,
+        "token": "QueryBus",
+        "initTime": 8.8433
+      }
+    },
+    "-227071807": {
+      "id": "-227071807",
+      "label": "EventBus",
+      "parent": "-905679032",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "CqrsModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": true,
+        "token": "EventBus"
+      }
+    },
+    "-1789024433": {
+      "id": "-1789024433",
+      "label": "UnhandledExceptionBus",
+      "parent": "-905679032",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "CqrsModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": true,
+        "token": "UnhandledExceptionBus",
+        "initTime": 6.82510000000002
+      }
+    },
+    "-1610909994": {
+      "id": "-1610909994",
+      "label": "DeleteTeacherModule",
+      "metadata": {
+        "type": "module",
+        "global": false,
+        "dynamic": false,
+        "internal": false
+      }
+    },
+    "-1165388000": {
+      "id": "-1165388000",
+      "label": "DeleteTeacherModule",
+      "parent": "-1610909994",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "DeleteTeacherModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "DeleteTeacherModule",
+        "initTime": 6.093900000000076
+      }
+    },
+    "-472802532": {
+      "id": "-472802532",
+      "label": "ModuleRef",
+      "parent": "-1610909994",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "DeleteTeacherModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ModuleRef"
+      }
+    },
+    "-349014255": {
+      "id": "-349014255",
+      "label": "ApplicationConfig",
+      "parent": "-1610909994",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "DeleteTeacherModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ApplicationConfig"
+      }
+    }
+  },
+  "edges": {
+    "189694679": {
+      "source": "1434456218",
+      "target": "671882984",
+      "metadata": {
+        "type": "class-to-class",
+        "sourceModuleName": "InternalCoreModule",
+        "sourceClassName": "Reflector",
+        "targetClassName": "Reflector",
+        "sourceClassToken": "Reflector",
+        "targetClassToken": "Reflector",
+        "targetModuleName": "InternalCoreModule",
+        "keyOrIndex": 0,
+        "injectionType": "constructor",
+        "internal": true
+      },
+      "id": "189694679"
+    },
+    "197903252": {
+      "source": "512577864",
+      "target": "-1609194173",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "RegisterStudentToTeacherModule",
+        "targetModuleName": "DynamoModule"
+      },
+      "id": "197903252"
+    },
+    "204641477": {
+      "source": "-1610909994",
+      "target": "-905679032",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "DeleteTeacherModule",
+        "targetModuleName": "CqrsModule"
+      },
+      "id": "204641477"
+    },
+    "426907568": {
+      "source": "-19112576",
+      "target": "-259102566",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "AppModule",
+        "targetModuleName": "StudentModule"
+      },
+      "id": "426907568"
+    },
+    "617580582": {
+      "source": "-1610909994",
+      "target": "-1609194173",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "DeleteTeacherModule",
+        "targetModuleName": "DynamoModule"
+      },
+      "id": "617580582"
+    },
+    "651956257": {
+      "source": "-1452901037",
+      "target": "1771390018",
+      "metadata": {
+        "type": "class-to-class",
+        "sourceModuleName": "CqrsModule",
+        "sourceClassName": "QueryBus",
+        "targetClassName": "ModuleRef",
+        "sourceClassToken": "QueryBus",
+        "targetClassToken": "ModuleRef",
+        "targetModuleName": "CqrsModule",
+        "keyOrIndex": 0,
+        "injectionType": "constructor",
+        "internal": true
+      },
+      "id": "651956257"
+    },
+    "913866243": {
+      "source": "-19112576",
+      "target": "-2120771327",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "AppModule",
+        "targetModuleName": "TeacherModule"
+      },
+      "id": "913866243"
+    },
+    "1056428433": {
+      "source": "-19112576",
+      "target": "555176277",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "AppModule",
+        "targetModuleName": "InternalCoreModule"
+      },
+      "id": "1056428433"
+    },
+    "1437192360": {
+      "source": "-19112576",
+      "target": "-1609194173",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "AppModule",
+        "targetModuleName": "DynamoModule"
+      },
+      "id": "1437192360"
+    },
+    "1747142230": {
+      "source": "-2120771327",
+      "target": "555176277",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "TeacherModule",
+        "targetModuleName": "InternalCoreModule"
+      },
+      "id": "1747142230"
+    },
+    "1872575591": {
+      "source": "512577864",
+      "target": "555176277",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "RegisterStudentToTeacherModule",
+        "targetModuleName": "InternalCoreModule"
+      },
+      "id": "1872575591"
+    },
+    "1909230031": {
+      "source": "-1610909994",
+      "target": "555176277",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "DeleteTeacherModule",
+        "targetModuleName": "InternalCoreModule"
+      },
+      "id": "1909230031"
+    },
+    "-1602614019": {
+      "source": "-77522000",
+      "target": "1771390018",
+      "metadata": {
+        "type": "class-to-class",
+        "sourceModuleName": "CqrsModule",
+        "sourceClassName": "CommandBus",
+        "targetClassName": "ModuleRef",
+        "sourceClassToken": "CommandBus",
+        "targetClassToken": "ModuleRef",
+        "targetModuleName": "CqrsModule",
+        "keyOrIndex": 0,
+        "injectionType": "constructor",
+        "internal": true
+      },
+      "id": "-1602614019"
+    },
+    "-84223663": {
+      "source": "-1609194173",
+      "target": "555176277",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "DynamoModule",
+        "targetModuleName": "InternalCoreModule"
+      },
+      "id": "-84223663"
+    },
+    "-745708397": {
+      "source": "-259102566",
+      "target": "555176277",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "StudentModule",
+        "targetModuleName": "InternalCoreModule"
+      },
+      "id": "-745708397"
+    },
+    "-1624450134": {
+      "source": "-259102566",
+      "target": "-1609194173",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "StudentModule",
+        "targetModuleName": "DynamoModule"
+      },
+      "id": "-1624450134"
+    },
+    "-1380163581": {
+      "source": "-2120771327",
+      "target": "512577864",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "TeacherModule",
+        "targetModuleName": "RegisterStudentToTeacherModule"
+      },
+      "id": "-1380163581"
+    },
+    "-2002413545": {
+      "source": "-2120771327",
+      "target": "-1610909994",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "TeacherModule",
+        "targetModuleName": "DeleteTeacherModule"
+      },
+      "id": "-2002413545"
+    },
+    "-1421004499": {
+      "source": "-2120771327",
+      "target": "-1609194173",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "TeacherModule",
+        "targetModuleName": "DynamoModule"
+      },
+      "id": "-1421004499"
+    },
+    "-474059517": {
+      "source": "512577864",
+      "target": "-905679032",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "RegisterStudentToTeacherModule",
+        "targetModuleName": "CqrsModule"
+      },
+      "id": "-474059517"
+    },
+    "-2017568312": {
+      "source": "-905679032",
+      "target": "555176277",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "CqrsModule",
+        "targetModuleName": "InternalCoreModule"
+      },
+      "id": "-2017568312"
+    },
+    "-212790027": {
+      "source": "-905679032",
+      "target": "-1609194173",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "CqrsModule",
+        "targetModuleName": "DynamoModule"
+      },
+      "id": "-212790027"
+    }
+  },
+  "entrypoints": {},
+  "extras": {
+    "orphanedEnhancers": [],
+    "attachedEnhancers": []
+  },
+  "status": "partial",
+  "metadata": {
+    "cause": {
+      "type": "unknown-dependencies",
+      "context": {
+        "index": 2,
+        "dependencies": [
+          "ITeachersResource",
+          "IStudentsResource",
+          "ITeacherStudentsResource"
+        ],
+        "name": "ITeacherStudentsResource"
+      },
+      "moduleId": "512577864",
+      "nodeId": "-123270570"
+    }
+  }
+}
