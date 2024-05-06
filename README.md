@@ -7,6 +7,19 @@
 $ npm install
 ```
 
+## Setting up the DB
+
+```bash
+# Start Docker Compose
+$ npm run db
+
+# Create the table
+$ npm run ctbl
+
+# Check table is created
+$ npm run lstbl
+```
+
 ## Running the app
 
 ```bash
