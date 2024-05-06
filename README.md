@@ -160,3 +160,18 @@ $ npm run test:cov
     </tr>
   </tbody>
 </table>
+
+## References
+### Set up
+- [How to Build a Serverless REST API with NestJS and DynamoDB](https://serverlesscorner.com/how-to-build-a-serverless-rest-api-with-nestjs-and-dynamodb-7b58b5b59bf6)
+- [Implementing NestJS API using AWS DynamoDB locally with Docker](https://ututuv.medium.com/implementing-nestjs-api-using-aws-dynamodb-locally-with-docker-84371d79f2c)
+### Single table design
+- [7 Common DynamoDB Patterns for Modeling and Building an App with Alex De Brie](https://www.youtube.com/watch?v=Q6-qWdsa8a4)
+- [This project was built for a DynamoDB demo in the previous video^](https://github.com/alexdebrie/dynamodb-instagram?tab=readme-ov-file)
+- [DynamoDB Design Patterns for Single Table Design](https://www.serverlesslife.com/DynamoDB_Design_Patterns_for_Single_Table_Design.html)
+### CQRS Pattern
+- [Creating a Todo API using NestJS and CQRS Pattern](https://engcfraposo.medium.com/creating-a-todo-api-using-nestjs-and-cqrs-pattern-8dd27dec9182)
+- [CQRS Software Architecture Pattern: The Good, the Bad, and the Ugly](https://medium.com/@emer.kurbegovic/cqrs-software-architecture-pattern-the-good-the-bad-and-the-ugly-efe48e8dcd14)
+### Testing
+- [A repository to show off to the community methods of testing NestJS](https://github.com/jmcdo29/testing-nestjs)
+- [Mocking modular AWS SDK for JavaScript (v3) in Unit Tests](https://aws.amazon.com/blogs/developer/mocking-modular-aws-sdk-for-javascript-v3-in-unit-tests/)
