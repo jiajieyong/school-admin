@@ -176,7 +176,7 @@ Postman collection file included as well to test endpoints
 </table>
 
 ## Modules map
-![Modules](modules-map.png)
+
 
 These modules are dependent on the global dynamoModule
 
