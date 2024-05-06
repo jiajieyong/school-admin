@@ -42,6 +42,7 @@ $ npm run test:watch
 # test coverage
 $ npm run test:cov
 ```
+Postman collection file included as well to test endpoints
 
 ## Entities
 
@@ -173,6 +174,11 @@ $ npm run test:cov
     </tr>
   </tbody>
 </table>
+
+## Modules map
+![Modules](modules-map.png)
+
+These modules are dependent on the global dynamoModule
 
 ## References
 ### Set up
