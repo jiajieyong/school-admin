@@ -67,7 +67,7 @@ export class RegisterStudentToTeacherHandler
         throw new StudentAlreadyAssignedException(studentEmail, teacher.email);
       }
 
-      this.teacherStudents.addStudent(teacher, student);
+      return this.teacherStudents.addStudent(teacher, student);
     }
   }
 }
