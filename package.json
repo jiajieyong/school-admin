@@ -12,6 +12,7 @@
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
+    "db": "docker-compose -f dynamo.docker-compose.yml up -d",
     "lstbl": "aws dynamodb list-tables --endpoint-url http://localhost:8000",
     "ctbl": "aws dynamodb create-table --cli-input-json file://table-script.json --endpoint-url http://localhost:8000",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
